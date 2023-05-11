@@ -52,7 +52,7 @@ router.delete(
   removeuser_content,
   async (req, res) => {
     try {
-      await res.alcolicPer.remove()
+      await res.noneAlochlic.remove()
       res.json({ message: 'Deleted record' })
     } catch (err) {
       res.status(500).json({ message: err.message })
@@ -126,7 +126,7 @@ async function alcohlicMiddleFunc(req, res, next) {
 async function removeuser_content(req, res, next) {
   let noneAlochlic
   try {
-    noneAlochlic = await user_content.findById(req.params.user_id)
+    noneAlochlic = await user_content.findById(req.params.id)
     if (noneAlochlic == null) {
       return res.status(404).json({ message: 'Cannot find record' })
     }

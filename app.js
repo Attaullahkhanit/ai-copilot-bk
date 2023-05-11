@@ -1,4 +1,4 @@
- require('dotenv').config({path: '.env'});
+require('dotenv').config({path: '.env'});
 
 const express = require('express')
 const app = express()
@@ -23,9 +23,12 @@ mongoose.set("strictQuery", false);
 
     const subscribersRouter = require('./routes/Admin')
     const customerApis = require('./routes/customerApis')
+    const stripeServer = require('./stripe-server/stripe')
+ 
     app.use('/', subscribersRouter,)
     app.use('/', customerApis,)
-       
+    app.use('/', stripeServer,)
+
     const apiRoutes = require('./routes/api');
     app.use('/api', apiRoutes);
     

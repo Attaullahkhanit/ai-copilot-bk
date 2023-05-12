@@ -14,11 +14,15 @@ router.post('/signup', async (req, res) => {
   })
   try {
     const loggedIn = await register.save()
-    res
-      .status(201)
-      .json({ message: 'successfuly created', status: true, error: false })
+    if (res) {
+      await Registeration.findOne({ email: req.body.email }, function (err, doc) {
+        return res
+          .status(200)
+          .send({ message:'successfuly created', userDetail: doc, optional:err, statu: true })
+      })
+    } 
   } catch (err) {
-    res.status(400).json({ message: err.message })
+    res.status(403).json({ message: err.message })
   }
 }) 
 
